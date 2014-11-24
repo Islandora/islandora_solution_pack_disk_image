@@ -27,5 +27,3 @@ script:
   - drush coder-review --reviews=production,security,style,i18n,potx,sniffer islandora_basic_disk_image
   - phpcpd --names *.module,*.inc,*.test sites/all/modules/islandora_solution_pack_disk_image
   - drush test-run --uri=http://localhost:8081 "Islandora Disk Image"
-notifications:
-  irc: "irc.freenode.org#islandora"
