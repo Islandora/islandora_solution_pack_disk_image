@@ -55,7 +55,7 @@ function islandora_disk_image_preprocess_islandora_disk_image(array &$variables)
     $disk_image_url = url("islandora/object/{$object->id}/datastream/OBJ/{$object->label}.dd", array('absolute' => TRUE));
     $variables['islandora_disk_image'] = l($variables['islandora_object_label'] . '.dd', $disk_image_url, array('html' => TRUE));
   }
-  // Photo of disk image
+  // Photo of disk image.
   if (isset($object['PHOTO']) && islandora_datastream_access(ISLANDORA_VIEW_OBJECTS, $object['PHOTO'])) {
     $photo_url = url("islandora/object/{$object->id}/datastream/PHOTO/view");
     $params = array(

@@ -49,7 +49,7 @@ function islandora_disk_image_islandora_required_objects(IslandoraTuque $connect
   $disk_image_content_model = $connection->repository->constructObject('islandora:sp_disk_image');
   $disk_image_content_model->owner = 'fedoraAdmin';
   $disk_image_content_model->label = 'Islandora Disk Image Content Model';
-  $image_content_model->models = 'fedora-system:ContentModel-3.0';
+  $disk_image_content_model->models = 'fedora-system:ContentModel-3.0';
   // DS-COMPOSITE-MODEL Datastream.
   $datastream = $disk_image_content_model->constructDatastream('DS-COMPOSITE-MODEL', 'X');
   $datastream->label = 'DS-COMPOSITE-MODEL';

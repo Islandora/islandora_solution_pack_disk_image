@@ -2,7 +2,8 @@
 
 /**
  * @file
- * Attempts to ingest an image into a randomly generated image collection
+ * Attempts to ingest a disk image into a randomly generated disk image
+ * collection.
  */
 
 class IslandoraDiskImageIngestTestCase extends IslandoraCollectionWebTestCase {
@@ -15,7 +16,7 @@ class IslandoraDiskImageIngestTestCase extends IslandoraCollectionWebTestCase {
   public static function getInfo() {
     return array(
       'name' => 'Disk Image Ingest/Purge',
-      'description' => 'Ingests and purges an image from a randomly generated image collection',
+      'description' => 'Ingests and purges a disk image from a randomly generated disk image collection',
       'group' => 'Islandora Disk Image',
     );
   }
@@ -34,7 +35,7 @@ class IslandoraDiskImageIngestTestCase extends IslandoraCollectionWebTestCase {
   }
 
   /**
-   * Creates an administrative user and attempts to ingest a test image.
+   * Creates an administrative user and attempts to ingest a test disk image.
    */
   public function testIngestPurgeDiskImage() {
     $user = $this->drupalCreateUser(array(
@@ -60,8 +61,8 @@ class IslandoraDiskImageIngestTestCase extends IslandoraCollectionWebTestCase {
     $this->drupalPost($path, $edit, t('Ingest'));
     $this->assertText('New Object', 'Disk Image object was created', 'Islandora');
     $path = $this->url;
-    $imagepath = $path . '/datastream/OBJ/view';
-    $this->assertLinkByHref($imagepath, 0, t('Ingested disk image found on view page'), t('Islandora'));
+    $diskimagepath = $path . '/datastream/OBJ/view';
+    $this->assertLinkByHref($diskimagepath, 0, t('Ingested disk image found on view page'), t('Islandora'));
 
     // Determines whether or not the appropriate datastreams were created.
     $object = $this->getObjectFromPath($this->url);
@@ -74,7 +75,11 @@ class IslandoraDiskImageIngestTestCase extends IslandoraCollectionWebTestCase {
       'JPG',
     );
     $this->assertDatastreams($object, $datastreams);
-
+    // @TODO: This is commented out for now as this assert function does not
+    // exist as of current. However, the web archive tests need to be updated
+    // so the slew of QA Dan's test can be merged.
+    // $this->assertImageDatastreams($object, $datastreams)
+    //
     // Attempts to delete the object and then collection.
     $this->deleteObject($object->id);
     $this->deleteTestCollection($collectionpid);
