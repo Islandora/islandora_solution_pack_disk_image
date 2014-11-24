@@ -18,7 +18,7 @@
  */
 function islandora_disk_image_upload_form(array $form, array &$form_state) {
   $upload_size = min((int) ini_get('post_max_size'), (int) ini_get('upload_max_filesize'));
-  $extensions = array('disk_image');
+  $extensions = array('dd', 'img');
   $form['disk_image_file'] = array(
     '#title' => t('Disk Image'),
     '#type' => 'managed_file',
