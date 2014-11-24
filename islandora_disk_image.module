@@ -144,7 +144,7 @@ function islandora_disk_image_islandora_sp_disk_image_islandora_ingest_steps() {
 function islandora_disk_image_islandora_sp_disk_image_islandora_derivative() {
   return array(
     array(
-      'source_dsid' => 'DISK_IMAGE_IMAGE',
+      'source_dsid' => 'PHOTO',
       'destination_dsid' => 'JPG',
       'weight' => '2',
       'function' => array(
@@ -153,7 +153,7 @@ function islandora_disk_image_islandora_sp_disk_image_islandora_derivative() {
       'file' => drupal_get_path('module', 'islandora_disk_image') . '/includes/derivatives.inc',
     ),
     array(
-      'source_dsid' => 'DISK_IMAGE_IMAGE',
+      'source_dsid' => 'PHOTO',
       'destination_dsid' => 'TN',
       'weight' => '2',
       'function' => array(

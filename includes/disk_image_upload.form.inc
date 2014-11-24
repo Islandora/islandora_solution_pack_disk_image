@@ -32,15 +32,15 @@ function islandora_disk_image_upload_form(array $form, array &$form_state) {
       'file_validate_size' => array($upload_size * 1024 * 1024),
     ),
   );
-  $form['upload_disk_image_image'] = array(
-    '#title' => t('Upload a disk_image_image?'),
+  $form['upload_photo'] = array(
+    '#title' => t('Upload a photo?'),
     '#type' => 'checkbox',
   );
-  $form['disk_image_image'] = array(
+  $form['photo'] = array(
     '#title' => t('Image of Disk Image'),
     '#type' => 'managed_file',
-    '#description' => t('Select disk_image_image to upload.<br/>Files must be less than <b>@size MB.</b><br/>Allowed file types: <b>DISK_IMAGE_IMAGE.</b>', array('@size' => $upload_size)),
-    '#default_value' => isset($form_state['values']['disk_image_image']) ? $form_state['values']['disk_image_image'] : NULL,
+    '#description' => t('Select photo to upload.<br/>Files must be less than <b>@size MB.</b><br/>Allowed file types: <b>PHOTO.</b>', array('@size' => $upload_size)),
+    '#default_value' => isset($form_state['values']['photo']) ? $form_state['values']['photo'] : NULL,
     '#upload_location' => 'temporary://',
     '#upload_validators' => array(
       'file_validate_extensions' => array('png'),
@@ -49,7 +49,7 @@ function islandora_disk_image_upload_form(array $form, array &$form_state) {
     ),
     '#states' => array(
       'visible' => array(
-        ':input[name="upload_disk_image_image"]' => array('checked' => TRUE),
+        ':input[name="upload_photo"]' => array('checked' => TRUE),
       ),
     ),
   );
@@ -65,9 +65,9 @@ function islandora_disk_image_upload_form(array $form, array &$form_state) {
  *   An array containing the Drupal form state.
  */
 function islandora_disk_image_upload_form_validate(array $form, array &$form_state) {
-  if ($form_state['values']['upload_disk_image_image']) {
-    if ($form_state['values']['disk_image_image'] == 0) {
-      form_error($form['disk_image_image'], t('No disk_image_image uploaded!'));
+  if ($form_state['values']['upload_photo']) {
+    if ($form_state['values']['photo'] == 0) {
+      form_error($form['photo'], t('No photo uploaded!'));
     }
   }
 }
@@ -95,18 +95,18 @@ function islandora_disk_image_upload_form_submit(array $form, array &$form_state
     $disk_image_ds->label = $disk_image_file->filename;
     $disk_image_ds->mimetype = $disk_image_file->filemime;
   }
-  // See if there's an attached DISK_IMAGE_IMAGE to process.
-  if ($form_state['values']['upload_disk_image_image']) {
-    if (empty($object['DISK_IMAGE_IMAGE'])) {
-      $disk_image_image_ds = $object->constructDatastream('DISK_IMAGE_IMAGE', 'M');
-      $object->ingestDatastream($disk_image_image_ds);
+  // See if there's an attached PHOTO to process.
+  if ($form_state['values']['upload_photo']) {
+    if (empty($object['PHOTO'])) {
+      $photo_ds = $object->constructDatastream('PHOTO', 'M');
+      $object->ingestDatastream($photo_ds);
     }
     else {
-      $disk_image_image_ds = $object['DISK_IMAGE_IMAGE'];
+      $photo_ds = $object['PHOTO'];
     }
-    $disk_image_image_file = file_load($form_state['values']['disk_image_image']);
-    $disk_image_image_ds->setContentFromFile($disk_image_image_file->uri, FALSE);
-    $disk_image_image_ds->label = $disk_image_image_file->filename;
-    $disk_image_image_ds->mimetype = $disk_image_image_file->filemime;
+    $photo_file = file_load($form_state['values']['photo']);
+    $photo_ds->setContentFromFile($photo_file->uri, FALSE);
+    $photo_ds->label = $photo_file->filename;
+    $photo_ds->mimetype = $photo_file->filemime;
   }
 }
