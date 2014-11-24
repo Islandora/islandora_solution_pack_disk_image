@@ -5,7 +5,7 @@
  * Attempts to ingest an image into a randomly generated image collection
  */
 
-class IslandoraBasicImageIngestTestCase extends IslandoraCollectionWebTestCase {
+class IslandoraDiskImageIngestTestCase extends IslandoraCollectionWebTestCase {
 
   /**
    * Get test information.
@@ -36,7 +36,7 @@ class IslandoraBasicImageIngestTestCase extends IslandoraCollectionWebTestCase {
   /**
    * Creates an administrative user and attempts to ingest a test image.
    */
-  public function testIngestPurgeBasicImage() {
+  public function testIngestPurgeDiskImage() {
     $user = $this->drupalCreateUser(array(
       'view fedora repository objects',
       'ingest fedora objects',
@@ -50,7 +50,7 @@ class IslandoraBasicImageIngestTestCase extends IslandoraCollectionWebTestCase {
     $label = $this->randomName(16);
     $suffix = $this->randomName(16);
     $collectionpid = 'islandora:' . $suffix;
-    $this->createTestCollection($label, 'islandora:sp_basic_image', $collectionpid);
+    $this->createTestCollection($label, 'islandora:sp_disk_image', $collectionpid);
 
     // Attempts to create an object.
     $path = 'islandora/object/' . $collectionpid . '/manage/overview/ingest';
