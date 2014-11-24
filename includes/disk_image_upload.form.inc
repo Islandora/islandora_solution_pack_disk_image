@@ -36,8 +36,8 @@ function islandora_disk_image_upload_form(array $form, array &$form_state) {
     '#title' => t('Upload a photo?'),
     '#type' => 'checkbox',
   );
-  $form['photo'] = array(
-    '#title' => t('Image of Disk Image'),
+  $form['photo_file'] = array(
+    '#title' => t('Photo of Disk Image'),
     '#type' => 'managed_file',
     '#description' => t('Select photo to upload.<br/>Files must be less than <b>@size MB.</b><br/>Allowed file types: <b>PHOTO.</b>', array('@size' => $upload_size)),
     '#default_value' => isset($form_state['values']['photo']) ? $form_state['values']['photo'] : NULL,
@@ -66,8 +66,8 @@ function islandora_disk_image_upload_form(array $form, array &$form_state) {
  */
 function islandora_disk_image_upload_form_validate(array $form, array &$form_state) {
   if ($form_state['values']['upload_photo']) {
-    if ($form_state['values']['photo'] == 0) {
-      form_error($form['photo'], t('No photo uploaded!'));
+    if ($form_state['values']['photo_file'] == 0) {
+      form_error($form['photo_file'], t('No photo uploaded!'));
     }
   }
 }
