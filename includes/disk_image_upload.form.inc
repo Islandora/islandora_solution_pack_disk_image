@@ -40,10 +40,10 @@ function islandora_disk_image_upload_form(array $form, array &$form_state) {
     '#title' => t('Photo of Disk Image'),
     '#type' => 'managed_file',
     '#description' => t('Select photo to upload.<br/>Files must be less than <b>@size MB.</b><br/>Allowed file types: <b>PHOTO.</b>', array('@size' => $upload_size)),
-    '#default_value' => isset($form_state['values']['photo']) ? $form_state['values']['photo'] : NULL,
+    '#default_value' => isset($form_state['values']['photo_file']) ? $form_state['values']['photo_file'] : NULL,
     '#upload_location' => 'temporary://',
     '#upload_validators' => array(
-      'file_validate_extensions' => array('png'),
+      'file_validate_extensions' => array('png', 'jpg', 'jpeg'),
       // Assume its specified in MB.
       'file_validate_size' => array($upload_size * 1024 * 1024),
     ),
