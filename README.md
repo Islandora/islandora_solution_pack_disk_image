@@ -18,7 +18,7 @@ Install as usual, see [this](https://drupal.org/documentation/install/modules-th
 
 ## Configuration
 
-Set the path for `fiwalk` and `warcfilter` in Administration » Islandora » Solution pack configuation » Disk image (admin/islandora/solution_pack_config/disk_image).
+Set the path for `fiwalk` in Administration » Islandora » Solution pack configuation » Disk image (admin/islandora/solution_pack_config/disk_image).
 
 ## Troubleshooting
 
