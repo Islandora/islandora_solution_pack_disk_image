@@ -104,7 +104,7 @@ function islandora_disk_image_upload_form_submit(array $form, array &$form_state
     else {
       $photo_ds = $object['PHOTO'];
     }
-    $photo_file = file_load($form_state['values']['photo']);
+    $photo_file = file_load($form_state['values']['photo_file']);
     $photo_ds->setContentFromFile($photo_file->uri, FALSE);
     $photo_ds->label = $photo_file->filename;
     $photo_ds->mimetype = $photo_file->filemime;

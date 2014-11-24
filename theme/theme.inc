@@ -52,7 +52,15 @@ function islandora_disk_image_preprocess_islandora_disk_image(array &$variables)
   }
   // Download disk image.
   if (isset($object['OBJ']) && islandora_datastream_access(ISLANDORA_VIEW_OBJECTS, $object['OBJ'])) {
-    $disk_image_url = url("islandora/object/{$object->id}/datastream/OBJ/{$object->label}.vmdk", array('absolute' => TRUE));
-    $variables['islandora_disk_image'] = l($variables['islandora_object_label'] . '.vmdk', $disk_image_url, array('html' => TRUE));
+    $disk_image_url = url("islandora/object/{$object->id}/datastream/OBJ/{$object->label}.dd", array('absolute' => TRUE));
+    $variables['islandora_disk_image'] = l($variables['islandora_object_label'] . '.dd', $disk_image_url, array('html' => TRUE));
+  }
+  // Photo of disk image
+  $variables['islandora_photo'] = theme('image', $params);
+  if (isset($medium_size_url)) {
+    $variables['islandora_content'] = l($variables['islandora_photo'], $png_url, array('html' => TRUE));
+  }
+  else {
+    $variables['islandora_content'] = $variables['islandora_photo'];
   }
 }
