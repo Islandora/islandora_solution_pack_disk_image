@@ -18,7 +18,7 @@
  */
 function islandora_disk_image_upload_form(array $form, array &$form_state) {
   $upload_size = min((int) ini_get('post_max_size'), (int) ini_get('upload_max_filesize'));
-  $extensions = array('dd', 'img');
+  $extensions = array('dd img');
   $form['disk_image_file'] = array(
     '#title' => t('Disk Image'),
     '#type' => 'managed_file',
@@ -39,11 +39,11 @@ function islandora_disk_image_upload_form(array $form, array &$form_state) {
   $form['photo_file'] = array(
     '#title' => t('Photo of Disk Image'),
     '#type' => 'managed_file',
-    '#description' => t('Select photo to upload.<br/>Files must be less than <b>@size MB.</b><br/>Allowed file types: <b>PHOTO.</b>', array('@size' => $upload_size)),
+    '#description' => t('Select photo to upload.<br/>Files must be less than <b>@size MB.</b><br/>Allowed file types: <b>gif, png, jpg, jpeg.</b>', array('@size' => $upload_size)),
     '#default_value' => isset($form_state['values']['photo_file']) ? $form_state['values']['photo_file'] : NULL,
     '#upload_location' => 'temporary://',
     '#upload_validators' => array(
-      'file_validate_extensions' => array('png', 'jpg', 'jpeg'),
+      'file_validate_extensions' => array('gif png jpg jpeg'),
       // Assume its specified in MB.
       'file_validate_size' => array($upload_size * 1024 * 1024),
     ),
