@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Handles the creation and display of web archive objects.
+ * Handles the creation and display of disk image objects.
  */
 
 /**
@@ -119,7 +119,7 @@ function islandora_disk_image_islandora_xml_form_builder_form_associations() {
  * Implements hook_CMODEL_PID_islandora_view_object().
  */
 function islandora_disk_image_islandora_sp_disk_image_islandora_view_object($object, $page_number, $page_size) {
-  $output = theme('islandora_disk_image', array('object' => $object));
+  $output = theme('islandora_disk_image', array('islandora_object' => $object));
   return array('' => $output);
 }
 
