@@ -6,7 +6,7 @@
  * collection.
  */
 
-class IslandoraDiskImageIngestTestCase extends IslandoraCollectionWebTestCase {
+class IslandoraDiskimageIngestTestCase extends IslandoraCollectionWebTestCase {
 
   /**
    * Get test information.
@@ -39,7 +39,8 @@ class IslandoraDiskImageIngestTestCase extends IslandoraCollectionWebTestCase {
   /**
    * Creates an administrative user and attempts to ingest a test disk image.
    */
-  public function testIngestPurgeDiskImage() {
+  public function testIngestPurgeDiskimage() {
+    
     $user = $this->drupalCreateUser(array(
       'view fedora repository objects',
       'ingest fedora objects',
@@ -91,11 +92,7 @@ class IslandoraDiskImageIngestTestCase extends IslandoraCollectionWebTestCase {
       'JPG',
     );
     $this->assertDatastreams($object, $datastreams);
-    // @TODO: This is commented out for now as this assert function does not
-    // exist as of current. However, the web archive tests need to be updated
-    // so the slew of QA Dan's test can be merged.
-    // $this->assertImageDatastreams($object, $datastreams)
-    //
+    
     // Attempts to delete the object and then collection.
     $this->deleteObject($object->id);
     $this->deleteTestCollection($collectionpid);
