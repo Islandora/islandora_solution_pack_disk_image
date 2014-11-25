@@ -27,10 +27,12 @@ class IslandoraDiskImageIngestTestCase extends IslandoraCollectionWebTestCase {
    * @see IslandoraWebTestCase::setUp()
    */
   public function setUp() {
+    $this->imagemagick_convert = variable_get('imagemagick_convert', '/usr/bin/convert');
     parent::setUp(array(
       'islandora',
       'islandora_disk_image',
       'islandora_basic_collection',
+      'imagemagick',
     ));
   }
 
@@ -52,20 +54,31 @@ class IslandoraDiskImageIngestTestCase extends IslandoraCollectionWebTestCase {
     $suffix = $this->randomName(16);
     $collectionpid = 'islandora:' . $suffix;
     $this->createTestCollection($label, 'islandora:sp_disk_image', $collectionpid);
+    $edit = array(
+      'image_toolkit' => 'imagemagick',
+    );
+    $this->drupalPost('admin/config/media/image-toolkit', $edit, 'Save configuration');
+    $edit = array(
+      'imagemagick_convert' => $this->imagemagick_convert,
+    );
+    $this->drupalPost('admin/config/media/image-toolkit', $edit, 'Save configuration');
 
     // Attempts to create an object.
     $path = 'islandora/object/' . $collectionpid . '/manage/overview/ingest';
     $file = drupal_get_path('module', 'islandora_disk_image') . '/tests/fixtures/test.dd';
+    $photo = drupal_get_path('module', 'islandora_disk_image') . '/tests/fixtures/test.jpg';
     $handle = fopen($file, "r");
     $contents = fread($handle, filesize($file));
     fclose($handle);
     $edit = array(
-      'files[file]' => $file,
+      'files[disk_image_file]' => $file,
+      'upload_photo' => TRUE,
+      'files[photo_file]' => $photo,
     );
     $this->drupalPost($path, $edit, t('Ingest'));
     $this->assertText('New Object', 'Disk Image object was created', 'Islandora');
-    $object = $this->getObjectFromPath($this->url);
-    $this->assertRaw('/datastream/OBJ/view', 'OBJ datastream visible on View page', 'Islandora');
+    $path = $this->url;
+    $this->assertRaw('/datastream/PHOTO/view', 'PHOTO download link found on view page', 'Islandora');
 
     // Determines whether or not the appropriate datastreams were created.
     $object = $this->getObjectFromPath($this->url);
