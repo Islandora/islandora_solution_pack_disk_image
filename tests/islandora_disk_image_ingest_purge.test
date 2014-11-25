@@ -55,14 +55,17 @@ class IslandoraDiskImageIngestTestCase extends IslandoraCollectionWebTestCase {
 
     // Attempts to create an object.
     $path = 'islandora/object/' . $collectionpid . '/manage/overview/ingest';
-    $edit = array();
     $file = drupal_get_path('module', 'islandora_disk_image') . '/tests/fixtures/test.dd';
-    $edit['files[file]'] = $file;
+    $handle = fopen($file, "r");
+    $contents = fread($handle, filesize($file));
+    fclose($handle);
+    $edit = array(
+      'files[file]' => $file,
+    );
     $this->drupalPost($path, $edit, t('Ingest'));
     $this->assertText('New Object', 'Disk Image object was created', 'Islandora');
-    $path = $this->url;
-    $diskimagepath = $path . '/datastream/OBJ/view';
-    $this->assertLinkByHref($diskimagepath, 0, t('Ingested disk image found on view page'), t('Islandora'));
+    $object = $this->getObjectFromPath($this->url);
+    $this->assertRaw('/datastream/OBJ/view', 'OBJ datastream visible on View page', 'Islandora');
 
     // Determines whether or not the appropriate datastreams were created.
     $object = $this->getObjectFromPath($this->url);
