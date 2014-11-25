@@ -28,3 +28,7 @@ script:
   - drush coder-review --reviews=production,security,style,i18n,potx,sniffer islandora_disk_image
   - phpcpd --names *.module,*.inc,*.test sites/all/modules/islandora_solution_pack_disk_image
   - drush -v test-run --uri=http://localhost:8081 "Islandora Disk Image"
+after_failure:
+  - cat /tmp/drush_webserver.log
+  - cd $HOME/drupal-*
+  - cat sites/default/files/simpletest/verbose/*
