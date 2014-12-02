@@ -10,11 +10,22 @@ This module requires the following modules/libraries:
 
 * [Islandora](https://github.com/islandora/islandora)
 * [Tuque](https://github.com/islandora/tuque)
-* [fiwalk](http://www.forensicswiki.org/wiki/Fiwalk)
+* [sleuthkit](https://github.com/sleuthkit/sleuthkit)
+* afflib-tools
+* libafflib-dev
 
 ## Installation
 
 Install as usual, see [this](https://drupal.org/documentation/install/modules-themes/modules-7) for further information.
+
+Sleuthkit install:
+
+* `sudo apt-get install libafflib-dev afflib-tools`
+* `git clone https://github.com/sleuthkit/sleuthkit.git`
+* `cd sleuthkit`
+* `./bootstrap`
+* `./configure` (no need to declare `--with-afflib=dir` if you installed `libafflib-dev` and `afflib-tools` as described above)
+* `make && sudo make install && sudo ldconfig`
 
 ## Configuration
 
