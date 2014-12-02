@@ -13,6 +13,8 @@ This module requires the following modules/libraries:
 * [sleuthkit](https://github.com/sleuthkit/sleuthkit)
 * afflib-tools
 * libafflib-dev
+* libewf-dev
+* ewf-tools
 
 ## Installation
 
@@ -20,12 +22,14 @@ Install as usual, see [this](https://drupal.org/documentation/install/modules-th
 
 Sleuthkit install:
 
-* `sudo apt-get install libafflib-dev afflib-tools`
+* `sudo apt-get install libafflib-dev afflib-tools libewf-dev ewf-tools`
 * `git clone https://github.com/sleuthkit/sleuthkit.git`
 * `cd sleuthkit`
 * `./bootstrap`
 * `./configure` (no need to declare `--with-afflib=dir` if you installed `libafflib-dev` and `afflib-tools` as described above)
 * `make && sudo make install && sudo ldconfig`
+
+**Note**: If you're on Ubuntu 12.04, you will need to [build](https://github.com/libyal/libewf/wiki/Building#using-debian-package-tools-deb) `libewf` from [source](https://github.com/libyal/libewf).
 
 ## Configuration
 
