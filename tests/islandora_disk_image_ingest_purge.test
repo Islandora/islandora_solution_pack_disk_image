@@ -40,7 +40,6 @@ class IslandoraDiskimageIngestTestCase extends IslandoraCollectionWebTestCase {
    * Creates an administrative user and attempts to ingest a test disk image.
    */
   public function testIngestPurgeDiskimage() {
-    
     $user = $this->drupalCreateUser(array(
       'view fedora repository objects',
       'ingest fedora objects',
@@ -92,7 +91,6 @@ class IslandoraDiskimageIngestTestCase extends IslandoraCollectionWebTestCase {
       'JPG',
     );
     $this->assertDatastreams($object, $datastreams);
-    
     // Attempts to delete the object and then collection.
     $this->deleteObject($object->id);
     $this->deleteTestCollection($collectionpid);

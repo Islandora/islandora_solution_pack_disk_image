@@ -180,8 +180,7 @@ function islandora_disk_image_imagemagick_convert($src, $dest, $args) {
 }
 
 /**
- * Fetches the uploaded disk image file from Fedora, and saves it to a temp
- * location.
+ * Fetches the uploaded disk image file from Fedora, and saves it to a temp location.
  *
  * @param AbstractObject $object
  *   The object to fetch the uploaded image file from.
@@ -198,8 +197,7 @@ function islandora_disk_image_get_uploaded_disk_image(AbstractObject $object, $d
 }
 
 /**
- * Creates the TECHMD_DFXML derived datatstream from the uploaded disk image
- * file.
+ * Creates the TECHMD_DFXML derived datatstream from the uploaded disk image file.
  *
  * @param AbstractObject $object
  *   The object to add the derived datastream to.
@@ -231,9 +229,9 @@ function islandora_disk_image_create_DFXML_derivative(AbstractObject $object, $f
       $disk_image_name = str_replace(':', '-', $object->id);
       $uploaded_disk_image = islandora_disk_image_get_uploaded_disk_image($object, $disk_image_name);
       $fiwalk = variable_get('islandora_disk_image_fiwalk_path', '/usr/local/bin/fiwalk');
-      $TECHMD_DFXML_file = drupal_realpath("temporary://{$disk_image_name}_TECHMD_DFXML.xml");
+      $dfxml_file = drupal_realpath("temporary://{$disk_image_name}_TECHMD_DFXML.xml");
       $disk_image_file = drupal_realpath($uploaded_disk_image);
-      $command = "$fiwalk -fx $disk_image_file > $TECHMD_DFXML_file";
+      $command = "$fiwalk -fx $disk_image_file > $dfxml_file";
       $derivative_file = exec($command, $output);
       file_unmanaged_delete($uploaded_disk_image);
       if ($derivative_file === FALSE) {
@@ -250,7 +248,7 @@ function islandora_disk_image_create_DFXML_derivative(AbstractObject $object, $f
         );
       }
       else {
-        return islandora_disk_image_add_datastream($object, 'TECHMD_DFXML', $TECHMD_DFXML_file, 'text/xml', t('DFXML'));
+        return islandora_disk_image_add_datastream($object, 'TECHMD_DFXML', $dfxml_file, 'text/xml', t('DFXML'));
       }
     }
   }
