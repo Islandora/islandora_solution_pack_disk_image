@@ -180,7 +180,7 @@ function islandora_disk_image_imagemagick_convert($src, $dest, $args) {
 }
 
 /**
- * Fetches the uploaded disk image file from Fedora, and saves it to a temp location.
+ * Fetches the uploaded disk image from Fedora and saves it to a temp location.
  *
  * @param AbstractObject $object
  *   The object to fetch the uploaded image file from.
@@ -197,7 +197,7 @@ function islandora_disk_image_get_uploaded_disk_image(AbstractObject $object, $d
 }
 
 /**
- * Creates the TECHMD_DFXML derived datatstream from the uploaded disk image file.
+ * Creates the TECHMD_DFXML derived datatstream from the uploaded disk image.
  *
  * @param AbstractObject $object
  *   The object to add the derived datastream to.
