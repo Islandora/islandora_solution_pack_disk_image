@@ -173,10 +173,87 @@ function islandora_disk_image_imagemagick_convert($src, $dest, $args) {
       '@command' => $command,
       '@output' => $output,
     );
-    watchdog('islandora_web_archive', "@message  @variables", WATCHDOG_ERROR);
+    watchdog('islandora_disk_image', "@message  @variables", WATCHDOG_ERROR);
     return FALSE;
   }
   return $dest;
+}
+
+/**
+ * Fetches the uploaded disk image file from Fedora, and saves it to a temp
+ * location.
+ *
+ * @param AbstractObject $object
+ *   The object to fetch the uploaded image file from.
+ * @param string $disk_image_name
+ *   The base name to use in creating temp files.
+ *
+ * @return string
+ *   The file path to the temp file if successful, otherwise FALSE.
+ */
+function islandora_disk_image_get_uploaded_disk_image(AbstractObject $object, $disk_image_name) {
+  $filename = file_create_filename("{$disk_image_name}_OBJ", 'temporary://');
+  $object['OBJ']->getContent($filename);
+  return $filename;
+}
+
+/**
+ * Creates the TECHMD_DFXML derived datatstream from the uploaded disk image
+ * file.
+ *
+ * @param AbstractObject $object
+ *   The object to add the derived datastream to.
+ * @param bool $force
+ *   Whether or not we should force the derivatives to be created, in the case
+ *   that they already exist on the given object.
+ *
+ * @return array
+ *   An array describing the outcome of the TECHMD_DFXML creation.
+ *
+ * @see hook_islandora_derivative()
+ */
+function islandora_disk_image_create_DFXML_derivative(AbstractObject $object, $force = TRUE) {
+  if ($force || !isset($object['TECHMD_DFXML'])) {
+    if (!isset($object['OBJ'])) {
+      return array(
+        'success' => FALSE,
+        'messages' => array(
+          array(
+            'message' => t('No OBJ datastream present for object @pid - TECHMD_DFXML creation was skipped.'),
+            'message_sub' => array('@pid' => $object->id),
+            'type' => 'watchdog',
+            'severity' => WATCHDOG_ERROR,
+          ),
+        ),
+      );
+    }
+    else {
+      $disk_image_name = str_replace(':', '-', $object->id);
+      $uploaded_disk_image = islandora_disk_image_get_uploaded_disk_image($object, $disk_image_name);
+      $fiwalk = variable_get('islandora_disk_image_fiwalk_path', '/usr/local/bin/fiwalk');
+      $TECHMD_DFXML_file = drupal_realpath("temporary://{$disk_image_name}_TECHMD_DFXML.xml");
+      $disk_image_file = drupal_realpath($uploaded_disk_image);
+      $command = "$fiwalk -fx $disk_image_file > $TECHMD_DFXML_file";
+      $derivative_file = exec($command, $output);
+      file_unmanaged_delete($uploaded_disk_image);
+      if ($derivative_file === FALSE) {
+        return array(
+          'success' => FALSE,
+          'messages' => array(
+            array(
+              'message' => t('TECHMD_DFXML failed for object @pid - TECHMD_DFXML creation was skipped.'),
+              'message_sub' => array('@pid' => $object->id),
+              'type' => 'watchdog',
+              'severity' => WATCHDOG_ERROR,
+            ),
+          ),
+        );
+      }
+      else {
+        return islandora_disk_image_add_datastream($object, 'TECHMD_DFXML', $csv_file, 'text/xml', t('DFXML'));
+      }
+    }
+  }
 }
 
 /**
