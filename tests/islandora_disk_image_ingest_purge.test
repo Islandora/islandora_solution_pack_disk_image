@@ -65,8 +65,8 @@ class IslandoraDiskimageIngestTestCase extends IslandoraCollectionWebTestCase {
 
     // Attempts to create an object.
     $path = 'islandora/object/' . $collectionpid . '/manage/overview/ingest';
-    $file = drupal_get_path('module', 'islandora_disk_image') . '/tests/fixtures/test.dd';
-    $photo = drupal_get_path('module', 'islandora_disk_image') . '/tests/fixtures/test.jpg';
+    $file = drupal_get_path('module', 'islandora_disk_image') . 'tests/fixtures/test.dd';
+    $photo = drupal_get_path('module', 'islandora_disk_image') . 'tests/fixtures/test.jpg';
     $handle = fopen($file, "r");
     $contents = fread($handle, filesize($file));
     fclose($handle);
@@ -92,7 +92,7 @@ class IslandoraDiskimageIngestTestCase extends IslandoraCollectionWebTestCase {
     );
     $this->assertDatastreams($object, $datastreams);
     // Attempts to delete the object and then collection.
-    $this->deleteObject($object->id);
+    $this->deleteObject($object);
     $this->deleteTestCollection($collectionpid);
   }
 }
