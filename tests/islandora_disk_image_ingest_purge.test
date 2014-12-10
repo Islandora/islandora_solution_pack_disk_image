@@ -76,9 +76,9 @@ class IslandoraDiskImageIngestTestCase extends IslandoraCollectionWebTestCase {
       'files[photo_file]' => $photo,
     );
     $this->drupalPost($path, $edit, t('Ingest'));
-    $this->assertText('New Object', 'Disk Image object was created', 'Islandora');
+    $this->assertText('has been ingested', 'islandora');
     $object = $this->getObjectFromPath($this->url);
-    $this->assertRaw('/datastream/JPG/view', 'JPG datastream visible on View page', 'Islandora');
+    $this->assertRaw('/datastream/PHOTO/view', 'PHOTO datastream visible on View page', 'Islandora');
 
     // Determines whether or not the appropriate datastreams were created.
     $object = $this->getObjectFromPath($this->url);
