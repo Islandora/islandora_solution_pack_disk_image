@@ -66,19 +66,22 @@ class IslandoraDiskImageIngestTestCase extends IslandoraCollectionWebTestCase {
     // Attempts to create an object.
     $path = 'islandora/object/' . $collectionpid . '/manage/overview/ingest';
     $file = drupal_get_path('module', 'islandora_disk_image') . '/tests/fixtures/test.dd';
-    $photo = drupal_get_path('module', 'islandora_disk_image') . '/tests/fixtures/test.jpg';
+    //$photo = drupal_get_path('module', 'islandora_disk_image') . '/tests/fixtures/test.jpg';
     $handle = fopen($file, "r");
     $contents = fread($handle, filesize($file));
     fclose($handle);
     $edit = array(
       'files[disk_image_file]' => $file,
-      'upload_photo' => TRUE,
-      'files[photo_file]' => $photo,
     );
+    //$edit = array(
+    //  'files[disk_image_file]' => $file,
+    //  'upload_photo' => TRUE,
+    //  'files[photo_file]' => $photo,
+    //);
     $this->drupalPost($path, $edit, t('Ingest'));
     $this->assertText('has been ingested', 'islandora');
     $object = $this->getObjectFromPath($this->url);
-    $this->assertRaw('/datastream/PHOTO/view', 'PHOTO datastream visible on View page', 'Islandora');
+    //$this->assertRaw('/datastream/PHOTO/view', 'PHOTO datastream visible on View page', 'Islandora');
 
     // Determines whether or not the appropriate datastreams were created.
     $object = $this->getObjectFromPath($this->url);
@@ -86,9 +89,9 @@ class IslandoraDiskImageIngestTestCase extends IslandoraCollectionWebTestCase {
       'RELS-EXT',
       'DC',
       'OBJ',
-      'PHOTO',
+      //'PHOTO',
       'TN',
-      'JPG',
+      //'JPG',
     );
     $this->assertDatastreams($object, $datastreams);
     // Attempts to delete the object and then collection.
