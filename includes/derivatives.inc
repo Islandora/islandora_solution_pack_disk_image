@@ -248,7 +248,7 @@ function islandora_disk_image_create_DFXML_derivative(AbstractObject $object, $f
         );
       }
       else {
-        return islandora_disk_image_add_datastream($object, 'TECHMD_DFXML', $dfxml_file, 'text/xml', t('DFXML'));
+        return islandora_disk_image_add_datastream($object, 'TECHMD_DFXML', $dfxml_file, 'application/xml', t('DFXML'));
       }
     }
   }

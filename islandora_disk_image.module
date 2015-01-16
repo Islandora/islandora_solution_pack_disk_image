@@ -53,7 +53,7 @@ function islandora_disk_image_islandora_required_objects(IslandoraTuque $connect
   // DS-COMPOSITE-MODEL Datastream.
   $datastream = $disk_image_content_model->constructDatastream('DS-COMPOSITE-MODEL', 'X');
   $datastream->label = 'DS-COMPOSITE-MODEL';
-  $datastream->mimetype = 'text/xml';
+  $datastream->mimetype = 'application/xml';
   $datastream->setContentFromFile("$module_path/xml/islandora_disk_image_ds_composite_model.xml", FALSE);
   $disk_image_content_model->ingestDatastream($datastream);
   // Disk Image Collection.
@@ -65,7 +65,7 @@ function islandora_disk_image_islandora_required_objects(IslandoraTuque $connect
   // Collection Policy Datastream.
   $datastream = $disk_image_collection->constructDatastream('COLLECTION_POLICY', 'X');
   $datastream->label = 'Collection policy';
-  $datastream->mimetype = 'text/xml';
+  $datastream->mimetype = 'application/xml';
   $datastream->setContentFromFile("$module_path/xml/islandora_disk_image_collection_policy.xml", FALSE);
   $disk_image_collection->ingestDatastream($datastream);
   // TN Datastream.
