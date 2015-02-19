@@ -31,3 +31,5 @@ after_failure:
   - cat /tmp/drush_webserver.log
   - cd $HOME/drupal-*
   - cat sites/default/files/simpletest/verbose/*
+notifications:
+  irc: "irc.freenode.org#islandora"
