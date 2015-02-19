@@ -1,4 +1,4 @@
-# Disk Image Solution Pack [![Build Status](https://travis-ci.org/ruebot/islandora_solution_pack_disk_image.png?branch=7.x)](https://travis-ci.org/ruebot/islandora_solution_pack_disk_image)
+# Disk Image Solution Pack [![Build Status](https://travis-ci.org/Islandora/islandora_solution_pack_disk_image.png?branch=7.x)](https://travis-ci.org/Islandora/islandora_solution_pack_disk_image)
 
 ## Introduction
 
