@@ -31,7 +31,7 @@ function islandora_disk_image_preprocess_islandora_disk_image(array &$variables)
   $variables['islandora_dublin_core'] = isset($dc_object) ? $dc_object : NULL;
   $variables['dc_array'] = isset($dc_object) ? $dc_object->asArray() : array();
   $variables['islandora_object_label'] = $object->label;
-  $variables['islandora_datastream_label'] =  $object['OBJ']->label;
+  $variables['islandora_datastream_label'] = $object['OBJ']->label;
   $variables['theme_hook_suggestions'][] = 'islandora_disk_image__' . str_replace(':', '_', $object->id);
   $variables['parent_collections'] = islandora_get_parents_from_rels_ext($object);
   $variables['metadata'] = islandora_retrieve_metadata_markup($object);
