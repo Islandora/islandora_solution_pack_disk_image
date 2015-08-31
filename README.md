@@ -37,6 +37,10 @@ Set the path for `fiwalk` in Administration » Islandora » Solution pack config
 
 If you would like to index the output of `fiwalk` in Solr, you can use [this](https://github.com/yorkulibraries/basic-solr-config/blob/kappa/islandora_transforms/slurp_all_DFXML_to_solr.xslt) xslt.
 
+## Documentation
+
+Further documentation for this module is available at [our wiki](https://wiki.duraspace.org/display/ISLANDORA/Disk+Image+Solution+Pack).
+
 ## Troubleshooting
 
 Having problems or solved a problem? Check out the Islandora google groups for a solution.
@@ -52,7 +56,7 @@ This project was inspired by Mark Matienzo's [Gumshoe](https://github.com/anarch
 
 ## Development
 
-If you would like to contribute to this module, please check out our helpful [Documentation for Developers](https://github.com/Islandora/islandora/wiki#wiki-documentation-for-developers) info, as well as our [Developers](http://islandora.ca/developers) section on the Islandora.ca site.
+If you would like to contribute to this module, please check out [CONTRIBUTING.md](CONTRIBUTING.md). In addition, we have helpful [Documentation for Developers](https://github.com/Islandora/islandora/wiki#wiki-documentation-for-developers) info, as well as our [Developers](http://islandora.ca/developers) section on the [Islandora.ca](http://islandora.ca) site.
 
 ## License
 
