@@ -36,7 +36,6 @@ function islandora_disk_image_preprocess_islandora_disk_image(array &$variables)
   $variables['metadata'] = islandora_retrieve_metadata_markup($object);
   $variables['description'] = islandora_retrieve_description_markup($object);
 
-
   // Original.
   if (isset($object['OBJ']) && islandora_datastream_access(ISLANDORA_VIEW_OBJECTS, $object['OBJ'])) {
     $disk_image_url = url("islandora/object/{$object->id}/datastream/OBJ/view", array('absolute' => TRUE));
