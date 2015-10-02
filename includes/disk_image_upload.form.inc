@@ -81,20 +81,19 @@ function islandora_disk_image_upload_form_validate(array $form, array &$form_sta
  *   An array containing the Drupal form state.
  */
 function islandora_disk_image_upload_form_submit(array $form, array &$form_state) {
-  $objects = &islandora_ingest_form_get_objects($form_state);
-  foreach ($objects as $object) {
-    if (empty($object['OBJ'])) {
-      $disk_image_ds = $object->constructDatastream('OBJ', 'M');
-      $object->ingestDatastream($disk_image_ds);
-    }
-    else {
-      $disk_image_ds = $object['OBJ'];
-    }
-    $disk_image_file = file_load($form_state['values']['disk_image_file']);
-    $disk_image_ds->setContentFromFile($disk_image_file->uri, FALSE);
-    $disk_image_ds->label = $disk_image_file->filename;
-    $disk_image_ds->mimetype = $disk_image_file->filemime;
+  $object = islandora_ingest_form_get_object($form_state);
+  if (empty($object['OBJ'])) {
+    $disk_image_ds = $object->constructDatastream('OBJ', 'M');
+    $object->ingestDatastream($disk_image_ds);
   }
+  else {
+    $disk_image_ds = $object['OBJ'];
+  }
+  $disk_image_file = file_load($form_state['values']['disk_image_file']);
+  $disk_image_ds->setContentFromFile($disk_image_file->uri, FALSE);
+  $disk_image_ds->label = $disk_image_file->filename;
+  $disk_image_ds->mimetype = $disk_image_file->filemime;
+
   // See if there's an attached PHOTO to process.
   if ($form_state['values']['upload_photo']) {
     if (empty($object['PHOTO'])) {
