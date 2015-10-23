@@ -35,6 +35,8 @@ Sleuthkit install:
 
 Set the path for `fiwalk` in Administration » Islandora » Solution pack configuation » Disk image (admin/islandora/solution_pack_config/disk_image).
 
+![image](https://cloud.githubusercontent.com/assets/2371345/10694726/28886ca2-7976-11e5-9b38-abffe242cd20.png)
+
 If you would like to index the output of `fiwalk` in Solr, you can use [this](https://github.com/yorkulibraries/basic-solr-config/blob/kappa/islandora_transforms/slurp_all_DFXML_to_solr.xslt) xslt.
 
 ## Documentation
