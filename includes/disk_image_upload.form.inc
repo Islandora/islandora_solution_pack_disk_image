@@ -19,9 +19,11 @@
 function islandora_disk_image_upload_form(array $form, array &$form_state) {
   $upload_size = min((int) ini_get('post_max_size'), (int) ini_get('upload_max_filesize'));
   $extensions = array('dd aff exx iso raw');
+  $upload_required = variable_get('islandora_require_obj_upload', TRUE);
   $form['disk_image_file'] = array(
     '#title' => t('Disk Image'),
     '#type' => 'managed_file',
+    '#required' => $upload_required,
     '#description' => t('Select disk image to upload.<br/>Files must be less than <b>@size MB.</b><br/>Allowed file types: <b>@ext.</b>', array(
       '@size' => $upload_size,
       '@ext' => $extensions[0]
