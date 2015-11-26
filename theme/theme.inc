@@ -31,6 +31,7 @@ function islandora_disk_image_preprocess_islandora_disk_image(array &$variables)
   $variables['islandora_dublin_core'] = isset($dc_object) ? $dc_object : NULL;
   $variables['dc_array'] = isset($dc_object) ? $dc_object->asArray() : array();
   $variables['islandora_object_label'] = $object->label;
+  $variables['islandora_datastream_label'] = $object['OBJ']->label;
   $variables['theme_hook_suggestions'][] = 'islandora_disk_image__' . str_replace(':', '_', $object->id);
   $variables['parent_collections'] = islandora_get_parents_from_rels_ext($object);
   $variables['metadata'] = islandora_retrieve_metadata_markup($object);
@@ -53,8 +54,7 @@ function islandora_disk_image_preprocess_islandora_disk_image(array &$variables)
   // Download disk image.
   if (isset($object['OBJ']) && islandora_datastream_access(ISLANDORA_VIEW_OBJECTS, $object['OBJ'])) {
     $disk_image_url = url("islandora/object/{$object->id}/datastream/OBJ/{$object->label}", array('absolute' => TRUE));
-    $islandora_datastream_label = $object['OBJ']->label;
-    $variables['islandora_disk_image'] = l($islandora_datastream_label, $disk_image_url, array('html' => TRUE));
+    $variables['islandora_disk_image'] = l($variables['islandora_datastream_label'], $disk_image_url, array('html' => TRUE));
   }
   // Photo of disk image.
   if (isset($object['PHOTO']) && islandora_datastream_access(ISLANDORA_VIEW_OBJECTS, $object['PHOTO'])) {
