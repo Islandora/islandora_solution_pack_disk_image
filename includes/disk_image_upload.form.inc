@@ -26,7 +26,7 @@ function islandora_disk_image_upload_form(array $form, array &$form_state) {
     '#required' => $upload_required,
     '#description' => t('Select disk image to upload.<br/>Files must be less than <b>@size MB.</b><br/>Allowed file types: <b>@ext.</b>', array(
       '@size' => $upload_size,
-      '@ext' => $extensions[0]
+      '@ext' => $extensions[0],
     )),
     '#default_value' => isset($form_state['values']['disk_image_file']) ? $form_state['values']['disk_image_file'] : NULL,
     '#upload_location' => 'temporary://',
