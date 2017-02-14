@@ -86,9 +86,9 @@ function islandora_disk_image_islandora_required_objects(IslandoraTuque $connect
 }
 
 /**
- * Implements hook_islandora_xml_form_builder_forms().
+ * Implements hook_xml_form_builder_forms().
  */
-function islandora_disk_image_islandora_xml_form_builder_forms() {
+function islandora_disk_image_xml_form_builder_forms() {
   $module_path = drupal_get_path('module', 'islandora_disk_image');
   return array(
     'Disk Image MODS form' => array(
@@ -98,9 +98,9 @@ function islandora_disk_image_islandora_xml_form_builder_forms() {
 }
 
 /**
- * Implements hook_islandora_xml_form_builder_form_associations().
+ * Implements hook_xml_form_builder_form_associations().
  */
-function islandora_disk_image_islandora_xml_form_builder_form_associations() {
+function islandora_disk_image_xml_form_builder_form_associations() {
   return array(
     'islandora_disk_image_mods_form' => array(
       'content_model' => 'islandora:sp_disk_image',
