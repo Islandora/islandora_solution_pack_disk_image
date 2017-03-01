@@ -31,7 +31,7 @@ script:
   - $ISLANDORA_DIR/tests/scripts/line_endings.sh sites/all/modules/islandora_solution_pack_disk_image
   - drush coder-review --reviews=production,security,style,i18n,potx,sniffer islandora_disk_image
   - phpcpd --names *.module,*.inc,*.test sites/all/modules/islandora_solution_pack_disk_image
-  - drush -v test-run --uri=http://localhost:8081 "Islandora Disk Image"
+  - php scripts/run-tests.sh --php `phpenv which php` --url http://localhost:8081 --verbose "Islandora Disk Image"
 after_failure:
   - cat /tmp/drush_webserver.log
   - cd $HOME/drupal-*
