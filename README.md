@@ -52,7 +52,7 @@ Having problems or solved a problem? Check out the Islandora google groups for a
 
 ## Maintainers
 
-* [Daniel Lamb](https://github.com/dannylamb)
+* [Daniel Aitken](https://github.com/qadan)
 
 This project was inspired by Mark Matienzo's [Gumshoe](https://github.com/anarchivist/gumshoe).
 
