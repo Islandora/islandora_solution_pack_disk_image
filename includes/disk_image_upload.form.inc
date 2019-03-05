@@ -31,7 +31,8 @@ function islandora_disk_image_upload_form(array $form, array &$form_state) {
     '#default_value' => isset($form_state['values']['disk_image_file']) ? $form_state['values']['disk_image_file'] : NULL,
     '#upload_location' => 'temporary://',
     '#upload_validators' => array(
-      'file_validate_extensions' => $extensions,
+      'file_validate_extensions' => array(),
+      'islandora_disk_image_extensions_validator' => $extensions,
       // Assume its specified in MB.
       'file_validate_size' => array($upload_size * 1024 * 1024),
     ),
@@ -114,4 +115,32 @@ function islandora_disk_image_upload_form_submit(array $form, array &$form_state
     $photo_ds->label = $photo_file->filename;
     $photo_ds->mimetype = $photo_file->filemime;
   }
+}
+
+/**
+ * File extension validator for handling EnCase files.
+ *
+ * @param object $file
+ *   The file being uploaded to be ingested.
+ * @param array $extensions
+ *   An array of extensions to validate against.
+ *
+ * @return array
+ *   An errors that were encountered.
+ */
+function islandora_disk_image_extensions_validator($file, array $extensions) {
+  $errors = array();
+  $parsed_extensions = explode(' ', $extensions);
+  $regex = '/\\.(' . preg_replace('/ +/', '|', preg_quote($extensions)) . ')$/i';
+
+  // @XXX: This regex is driven from https://github.com/libyal/libewf/blob/master/documentation/Expert%20Witness%20Compression%20Format%20%28EWF%29.asciidoc#222-ewf-e01.
+  if (in_array('exx', $parsed_extensions)) {
+    $regex = str_replace('exx', '[^abcd][a-z0-9][a-z0-9]', $regex);
+    if (!preg_match($regex, $file->filename)) {
+      $errors[] = t('Only files with the following extensions are allowed: %files-allowed.', array(
+        '%files-allowed' => $extensions,
+      ));
+    }
+  }
+  return $errors;
 }
