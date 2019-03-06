@@ -122,13 +122,13 @@ function islandora_disk_image_upload_form_submit(array $form, array &$form_state
  *
  * @param object $file
  *   The file being uploaded to be ingested.
- * @param array $extensions
- *   An array of extensions to validate against.
+ * @param string $extensions
+ *   A space delimtered string of extensions to be validated.
  *
  * @return array
  *   An errors that were encountered.
  */
-function islandora_disk_image_extensions_validator($file, array $extensions) {
+function islandora_disk_image_extensions_validator($file, $extensions) {
   $errors = array();
   $parsed_extensions = explode(' ', $extensions);
   $regex = '/\\.(' . preg_replace('/ +/', '|', preg_quote($extensions)) . ')$/i';
