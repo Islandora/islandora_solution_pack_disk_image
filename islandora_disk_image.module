@@ -172,3 +172,12 @@ function islandora_disk_image_islandora_sp_disk_image_islandora_derivative() {
     ),
   );
 }
+
+/**
+ * Implements hook_file_mimetype_mapping_alter().
+ */
+function islandora_disk_image_file_mimetype_mapping_alter(&$mapping) {
+  $mapping['mimetypes'][] = 'application/encase';
+  $index = array_search('application/encase', $mapping['mimetypes']);
+  $mapping['extensions']['e01'] = $index;
+}

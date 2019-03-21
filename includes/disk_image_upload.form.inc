@@ -13,12 +13,12 @@
  * @param array $form_state
  *   The drupal form state.
  *
- * @return string
+ * @return array
  *   The drupal form definition.
  */
 function islandora_disk_image_upload_form(array $form, array &$form_state) {
   $upload_size = min((int) ini_get('post_max_size'), (int) ini_get('upload_max_filesize'));
-  $extensions = array('dd aff exx iso raw');
+  $extensions = array('dd aff e01 iso raw');
   $upload_required = variable_get('islandora_require_obj_upload', TRUE);
   $form['disk_image_file'] = array(
     '#title' => t('Disk Image'),

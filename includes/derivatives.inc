@@ -191,7 +191,7 @@ function islandora_disk_image_imagemagick_convert($src, $dest, $args) {
  *   The file path to the temp file if successful, otherwise FALSE.
  */
 function islandora_disk_image_get_uploaded_disk_image(AbstractObject $object, $disk_image_name) {
-  $filename = file_create_filename("{$disk_image_name}_OBJ", 'temporary://');
+  $filename = file_create_filename("{$disk_image_name}", 'temporary://');
   $object['OBJ']->getContent($filename);
   return $filename;
 }
@@ -226,7 +226,7 @@ function islandora_disk_image_create_DFXML_derivative(AbstractObject $object, $f
       );
     }
     else {
-      $disk_image_name = str_replace(':', '-', $object->id);
+      $disk_image_name = $object['OBJ']->label;
       $uploaded_disk_image = islandora_disk_image_get_uploaded_disk_image($object, $disk_image_name);
       $fiwalk = variable_get('islandora_disk_image_fiwalk_path', '/usr/local/bin/fiwalk');
       $dfxml_file = drupal_realpath("temporary://{$disk_image_name}_TECHMD_DFXML.xml");
