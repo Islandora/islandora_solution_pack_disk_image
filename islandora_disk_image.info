@@ -8,3 +8,4 @@ core = 7.x
 configure = admin/islandora/solution_pack_config/disk_image
 stylesheets[all][] = css/islandora_disk_image.theme.css
 files[] = tests/islandora_disk_image_ingest_purge.test
+files[] = includes/batch.inc

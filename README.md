@@ -43,6 +43,11 @@ If you would like to index the output of `fiwalk` in Solr, you can use [this](ht
 
 Further documentation for this module is available at [our wiki](https://wiki.duraspace.org/display/ISLANDORA/Disk+Image+Solution+Pack).
 
+### Usage
+
+The batch provided by this module is virtually identical to [scan batch](https://github.com/Islandora/islandora_batch/blob/7.x/README.md#usage).
+The only difference is that the `content_models` parameter has no effect.
+
 ## Troubleshooting
 
 Having problems or solved a problem? Check out the Islandora google groups for a solution.
